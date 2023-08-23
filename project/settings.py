@@ -13,9 +13,9 @@ SECRET_KEY = 'django-insecure-%=_ieo-oni&nhhb-*_41zt)1uc1sz_5ynoy_gibxnm7nt=!9xl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
-
+WSGI_APPLICATION = 'project.wsgi.app'
 # Application definition
 
 INSTALLED_APPS = [
