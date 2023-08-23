@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>FCAI - Student Affairs</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+        <div class="nav-bar">
+            <span class="logo"><a href="#">FCAI</a></span>
+
+            <div class="menu">
+                
+                <ul class="nav-links">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'add' %}">Add</a></li>
+                    <li><a href="{% url 'view' %}">View</a></li>
+                </ul>
+            </div>
+
+            <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+              {% csrf_token %}
+                <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                <button type="submit" class="searchBtn">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+        </div>
+    </nav>
+</header>
+  <section>
+    <div class="buttons">
+      <button id="active">Active</button>
+      <button id="inactive" >Inactive</button>
+    </div> 
+    <div class="studentsTable" id="inactiveStudents">
+      <div class="tableSubject">
+        <h1>Inactive Students</h1>
+         
+      </div>
+
+      <table>
+        <tr>
+          <th>Photo</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+        {% for x in students %}
+        {% if x.stat == False %}
+        <tr>
+          {% if x.gender == True %}
+          <td><img src="{% static 'image/man.png' %}" alt="" /></td>
+          {% else %}
+          <td><img src="{% static 'image/woman.png' %}" alt="" /></td>
+          {% endif %}
+          
+          <td>{{x.sid}}</td>
+          <td>{{x.name}}</td>
+          <td id="inactiveTab">Inactive</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        
+      </table>
+    </div>
+    <div class="studentsTable" id="activeStudents">
+      <div class="tableSubject">
+        <h1>Active Students</h1>
+         
+      </div>
+      <table>
+        <tr>
+          <th>Photo</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+        {% for x in students %}
+        {% if x.stat == True %}
+        <tr>
+          {% if x.gender == True %}
+          <td><img src="{% static 'image/man.png' %}" alt="" /></td>
+          {% else %}
+          <td><img src="{% static 'image/woman.png' %}" alt="" /></td>
+          {% endif %}
+          <td>{{x.sid}}</td>
+          <td>{{x.name}}</td>
+          <td id="activeTab">Active</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        
+      </table>
+    </div>
+  </section>
+  <footer>
+    <p>Designed by FCAI Team</p>
+</footer>
+<script src="{% static 'js/activeAndInactive.js' %}"></script>
+</body>
+
+</html>

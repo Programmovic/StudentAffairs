@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Updock&display=swap" rel="stylesheet">
+    <script src="{% static 'js/popUps.js' %}"></script>
+    <title>FCAI - Projects</title>
+</head>
+<body>
+    <header>
+    </header>
+
+
+    <div id="popup-container" class="popup-container">
+        <div class="popup-card">
+            <div class="icon">
+                <img src="{% static 'image/162-1622413_4chan-404-pages-hd-png-download.png' %}" alt="">
+            </div>
+            <label>Project Not Found!</label>
+            <button type="submit" class="btn-close" onclick="closePopUp()"><i class="fa-solid fa-x"></i></button>
+        </div>
+    </div>
+
+
+
+    <section class="main-section">
+        <div class="text">
+            <h1>Hello!</h1>
+            <p>Choose The Project That You Want </p>
+        </div>
+        <section class="cards" id="websotes">
+            <h1 class ="title">Projects</h1> <br>
+            <div class="content">
+                <button class="homeCard" onclick="showPopUp(0)">
+                    <div class="icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                    <div class="info">
+                        <h2>Human Resources Website</h2>
+                    </div>
+
+
+                </button> 
+                
+                <button id="redirect" class="homeCard" > 
+                    <a href = "{% url 'index' %}" style="text-decoration: none ;">
+                    <div class="icon">
+                        <i  class="fa-solid fa-building-columns"></i>
+                    </div>
+
+                    <div class="info">
+                        <h2>Student Affairs website</h2> 
+                    </div>
+                    </a>
+                </button>
+
+                <button class="homeCard" onclick="showPopUp(0)">
+                    <div class="icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <div class="info">
+                        <h2>Higher studies website</h2>
+                    </div>
+
+
+                </button>
+
+                <button class="homeCard" onclick="showPopUp(0)">
+                    <div class="icon">
+                        <i class="fa-solid fa-flask-vial"></i>
+                    </div>
+
+                    <div class="info">
+                        <h2>Laboratory tracking website</h2>
+                    </div>
+
+
+                </button>
+
+
+
+
+        
+    </section>
+    <footer>
+        <p>Designed by FCAI Team</p>
+    </footer>
+</body>
+</html>

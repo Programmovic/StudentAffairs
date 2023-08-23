@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FCAI - Student Affairs</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-bar">
+                <span class="logo"><a href="#">FCAI</a></span>
+    
+                <div class="menu">
+                    
+                    <!-- <ul class="nav-links">
+                        <li><a href="#">Add</a></li>
+                        <li><a href="#">Update</a></li>
+                        <li><a href="#">Delete</a></li>
+                        <li><a href="#">View</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul> -->
+                </div>
+    
+                <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+                    {% csrf_token %}
+                      <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                      <button type="submit" class="searchBtn">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </form>
+            </div>
+        </nav>
+    </header>
+    <section class="main-section">
+        <div class="text">
+            <h1>What do you want to do?</h1>
+            <p>Choose the option that you want to do.</p>
+        </div>
+        <div class="options">
+            <a href="{% url 'add' %}">Add</a>
+            <a href="{% url 'view' %}" id="view">View</a>
+            <a href="{% url 'active' %}">Active and Inactive</a>
+        </div>
+    </section>
+    <footer>
+        <p>Designed by FCAI Team</p>
+    </footer>
+
+    <script src="{% static 'js/buttonsCheck.js' %}"></script>
+</body>
+</html>

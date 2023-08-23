@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>FCAI - Student Affairs</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="nav-bar">
+                    <span class="logo"><a href="#">FCAI</a></span>
+                    <div class="menu">
+                        <ul class="nav-links">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'add' %}">Add</a></li>
+                            <li><a href="{% url 'view' %}">View</a></li>
+                        </ul>
+                    </div>
+                    <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+                        {% csrf_token %}
+                          <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                          <button type="submit" class="searchBtn">
+                            <i class="fas fa-search"></i>
+                          </button>
+                        </form>
+                </div>
+            </nav>
+        </header>
+            <section class="DptRegister">
+                <div class="addForm w-40">
+                    <div class="addTitle">Department assignment</div>
+                    <div class="addFormContent">
+                        <div class="dptAssStdDetailsContainer">
+                            <div class="dptAssStdDetails">
+                                <span>ID: </span>
+                                <span>{{stdDPT.sid}}</span>
+                              </div>
+                              <div class="dptAssStdDetails">
+                                <span>Name: </span>
+                                <span>{{stdDPT.name}}</span>
+                              </div>
+                        </div>
+                        <form action="{% url 'department' stdDPT.id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="stdDetails">
+                                <div class="input-box">
+                                    <label for="Dpt">Department</label>
+                                    <div class="select">
+                                        <select class="DepartmentOptions" name = 'dep'>
+                                        <option value="Computer Science">Computer Science</option>
+                                        <option value="Information Systems">Information Systems</option>
+                                        <option value="Information Technology">Information Technology</option>
+                                        <option value="Artifitial Intellegence">Artifitial Intellegence</option>
+                                        <option value="Decision Support">Decision Support</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button" id ="Assign">
+                                <input type="submit" value="Assign" >
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <p>Designed by FCAI Team</p>
+            </footer>
+    </body>
+</html>

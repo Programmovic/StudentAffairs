@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>FCAI - All Students</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+        <div class="nav-bar">
+            <span class="logo"><a href="#">FCAI</a></span>
+
+            <div class="menu">
+                
+                <ul class="nav-links">
+                  <li><a href="{% url 'index' %}">Home</a></li>
+                  <li><a href="{% url 'add' %}">Add</a></li>
+                  <li><a href="#">View</a></li>
+                </ul>
+            </div>
+
+            <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+              {% csrf_token %}
+                <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                <button type="submit" class="searchBtn">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+        </div>
+    </nav>
+</header>
+  <section class="tableContainer">
+    <div class="studentsTable">
+      <h1 class="tableSubject">Students</h1>
+
+      <table>
+        <tr>
+          <th>Photo</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Birthdate</th>
+          <th>GPA</th>
+          <th>Level</th>
+          <th>Gender</th>
+          <th>Status</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+          {% if student.gender == True %}
+          <td><img src="{% static 'image/man.png' %}" alt="" /></td>
+          {% else %}
+          <td><img src="{% static 'image/woman.png' %}" alt="" /></td>
+          {% endif %}
+          <td>{{student.sid}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.phone}}</td>
+          <td>{{student.sBD}}</td>
+          <td>{{student.sgpa}}</td>
+          <td>{{student.level}}</td>     
+          {% if student.gender == True  %}
+          <td>Male</td>
+          {% else %}
+          <td>Female</td>
+          {% endif %}
+          {% if student.stat == True  %}
+          <td id="activeTab">Active</td>
+          {% else %}
+          <td id="inactiveTab">Inactive</td>
+          {% endif %}
+          <td><a href="{% url 'studentdetail' student.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+        </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+  </section>
+  <footer>
+    <p>Designed by FCAI Team</p>
+</footer>
+</body>
+
+</html>

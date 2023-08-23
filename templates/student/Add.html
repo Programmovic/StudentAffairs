@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FCAI - Add Student</title>
+</head>
+<body>
+        <header>
+            <nav>
+                <div class="nav-bar">
+                    <span class="logo"><a href="#">FCAI - Add</a></span>
+        
+                    <div class="menu">
+                        
+                        <ul class="nav-links">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="#">Add</a></li>
+                            <li><a href="{% url 'view' %}">View</a></li>
+                        </ul>
+                    </div>
+        
+                    <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+                      {% csrf_token %}
+                        <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                        <button type="submit" class="searchBtn">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </form>
+                </div>
+            </nav>
+        </header>
+    <section>
+        <div class="addForm">
+            <div class="addTitle">Add Student</div>
+            <div class="addFormContent">
+              <form action="#" id="form" method="POST">
+                {% csrf_token %}
+                <div class="stdDetails addCustomDisplay">
+                  <div class="input-box addInputWidth">
+                    <label for="ID">Student ID</label>
+                    <input type="number" id="ID" name="id" placeholder="Enter Student ID" required>
+                    <span id="checkID"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="name">Student Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter Student Name" required>
+                    <span id="checkName"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="BD">Student Birthday</label>
+                    <input type="date" id="Bd" name="Birthday" placeholder="Enter Student Birthday" required>
+                    <span id="checkDate"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="GPA">GPA</label>
+                    <input type="text" id="GPA" name="GPA" placeholder="Enter GPA" required>
+                    <span id="checkGPA"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="level">Level</label>
+                    <div class="select">
+                        <select class="levelsOptions" id="levels" name="level" onchange="getSelectValue()">
+                          <!-- <option value="Level 0">Your Level</option> -->
+                          <option value="Level 1">Level 1</option>
+                          <option value="Level 2">Level 2</option>
+                          <option value="Level 3">Level 3</option>
+                          <option value="Level 4">Level 4</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="Dpt">Department</label>
+                    <input type="text" id="Dpt" name="Department" placeholder="Enter Your level First" required>
+                    <span id="checkDpt"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="Email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter Email" required>
+                    <span id="checkEmail"></span>
+                  </div>
+                  <div class="input-box addInputWidth">
+                    <label for="phone">Phone</label>
+                    <input type="number" id="phone" name="phone" placeholder="Enter Phone Number" required>
+                    <span id="checkNum"></span>
+                  </div>
+                </div>
+                <div class="radio">
+                  <div class="gender">
+                    <label for="gender">Gender:</label>
+                    <input label="Male" type="radio" name="gender" value = True required>
+                    <input label="Female" type="radio" name="gender" value = False required>                  
+                  </div>
+                  <div class="status">
+                    <label for="stat">Status:</label>
+                    <input id="active" label="Active" type="radio" name="stat" value = True required>
+                    <input id="inactive" label="Inactive" type="radio" name="stat" value = False required>                  
+                  </div>
+                </div>
+                <div class="button rightPosition">
+                  <div id="status">
+                    
+                  </div>
+                  <input type="submit" value="Add" id="add">
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+    </section>
+    <footer>
+        <p>Designed by FCAI Team</p>
+    </footer>
+    <script src="{% static 'js/Validate.js' %}"></script>
+    <script src="{% static 'js/DeptValidations.js' %}"></script>
+</body>
+</html>

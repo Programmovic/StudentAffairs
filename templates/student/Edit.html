@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FCAI - Edit {{editStudent.name}}</title>
+</head>
+<body>
+        <header>
+            <nav>
+                <div class="nav-bar">
+                    <span class="logo"><a href="#">FCAI</a></span>
+        
+                    <div class="menu">
+                        
+                        <ul class="nav-links">
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'add' %}">Add</a></li>
+                            <li><a href="{% url 'view' %}">View</a></li>
+                        </ul>
+                    </div>
+        
+                    <form class="searchContainer"  method=POST  action = "{% url 'result' %}">
+                      {% csrf_token %}
+                        <input class="form-control me-2"  type = "search"   placeholder="Search..." name = "searched" >  
+                        <button type="submit" class="searchBtn">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      </form>
+                </div>
+            </nav>
+        </header>
+    <section>
+        <div class="addForm">
+            <div class="addTitle">Edit Data For "{{editStudent.name}}"</div>
+            <div class="addFormContent">
+              <form action="{% url 'editting' editStudent.id %}" id="form" method = POST>
+                {% csrf_token %}
+                <div class="stdDetails addCustomDisplay">
+                  <div class="input-box editInputWidth">
+                    <label for="ID">Student ID</label>
+                    <input type="number" id="ID" name="id" value="{{editStudent.sid}}" required>
+                    <span id="checkID"></span>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="name">Student Name</label>
+                    <input type="text" id="name" name="name" value="{{editStudent.name}}" required>
+                    <span id="checkName"></span>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="BD">Student Birthday</label>
+                    <input type="date" id="Bd" name="Birthday"required value="{{editStudent.sBD|date:'Y-m-d'}}">
+                    <span id="checkDate"></span>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="GPA">GPA</label>
+                    <input type="number" id="GPA" name="GPA" value="{{editStudent.sgpa}}" required>
+                    <span id="checkGPA"></span>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="level">Level</label>
+                    <div class="select">
+                        <select class="levelsOptions" id="levels" name = "level" onchange="getSelectValue()">
+                          <option value="Level 1">Level 1</option>
+                          <option value="Level 2">Level 2</option>
+                          <option value="Level 3">Level 3</option>
+                          <option value="Level 4">Level 4</option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="Email">Email</label>
+                    <input type="email" id="email" name="email" value="{{editStudent.email}}" required>
+                    <span id="checkEmail"></span>
+                  </div>
+                  <div class="input-box editInputWidth">
+                    <label for="phone">Phone</label>
+                    <input type="number" id="phone" name="phone" value="{{editStudent.phone}}" required>
+                    <span id="checkNum"></span>
+                  </div>
+                </div>
+                <div class="radio">
+                  <div class="gender">
+                    <label for="gender">Gender:</label>
+                    {% if editStudent.gender == True  %}
+                      <input label="Male" type="radio" name="gender" value="True" checked required>
+                      <input label="Female" type="radio" name="gender" value="False" required>
+                    {% else %}
+                      <input label="Male" type="radio" name="gender" value="True" required>
+                      <input label="Female" type="radio" name="gender" value="False" checked required> 
+                    {% endif %}                 
+                  </div>
+                  <div class="status">
+                    <label for="status">Status:</label>
+                    {% if editStudent.stat == True  %}
+                      <input label="Active" type="radio" name="status" value="True" checked required>
+                      <input label="Inactive" type="radio" name="status" value="False" required>
+                    {% else %}
+                      <input label="Active" type="radio" name="status" value="True" required>
+                      <input label="Inactive" type="radio" name="status" value="False" checked required> 
+                    {% endif %}                
+                  </div>
+                </div>
+                
+                <div class="button"> 
+                  <div id="status">  
+                  </div>
+                  <input type="submit" value="Update" id="update">
+
+                </div>
+              </form>
+            </div>
+          </div>
+    </section>
+    <footer>
+        <p>Designed by FCAI Team</p>
+    </footer>
+    <script src="{% static 'js/Validate.js' %}"></script>
+    
+</body>
+</html>
